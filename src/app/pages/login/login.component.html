@@ -1,22 +1,27 @@
 <div class="d-flex justify-content-center">
     <div class="card" style="width: 26rem;">
         <div class="card-body">
-            <h5 class="card-title">login</h5>
-            <form [formGroup]="form" (submit)=onSubmit()>
+            <h5 class="card-title">Login</h5>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email Address</label>
                     <input type="text" class="form-control"
                         formControlName="email"
                         placeholder="Email Address">
+                    <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-danger">
+                        Please enter a valid email.
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control"
                         formControlName="password"
                         placeholder="Password">
+                    <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="text-danger">
+                        Password is required and must be at least 6 characters.
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-success"
-                    [disabled]="form.invalid">Login</button>
+                <button type="submit" class="btn btn-success" [disabled]="form.invalid">Login</button>
             </form>
         </div>
     </div>
